@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Multi Shop</title>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -46,8 +46,8 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
+                            <button class="dropdown-item" type="button"><a href="{% url 'login' %}">Sign in</a></button>
+                            <button class="dropdown-item" type="button"><a href="{% url 'register' %}">Sign up</a></button>
                         </div>
                     </div>
                     <div class="btn-group mx-2">
@@ -148,6 +148,9 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
+                            {% if context.logout%}
+                            <a href="{% url 'home' %}" class="nav-item nav-link active">Logout</a>
+                            {% else %}
                             <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'shop' %}" class="nav-item nav-link">Shop</a>
                             <a href="{% url 'detail' %}" class="nav-item nav-link">Shop Detail</a>
@@ -159,7 +162,9 @@
                                 </div>
                             </div>
                             <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                           
                         </div>
+                        {% endif %}
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
@@ -170,6 +175,7 @@
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
                         </div>
+                       
                     </div>
                 </nav>
             </div>
@@ -245,7 +251,7 @@
                     </p>
                 </div>
                 <div class="col-md-6 px-xl-0 text-center text-md-right">
-                    <img class="img-fluid" src="img/payments.png" alt="">
+                    <img class="img-fluid" src="{% static 'images/payments.png'%}" alt="">
                 </div>
             </div>
         </div>
@@ -259,15 +265,15 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="{% static 'lib/easing/easing.min.js'%}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
     
         <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
+        <script src="{% static 'mail/jqBootstrapValidation.min.js'%}"></script>
+        <script src="{% static 'mail/contact.js'}"></script>
     
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="{% static 'js/main.js' %}"></script>
     
 </body>
 </html>

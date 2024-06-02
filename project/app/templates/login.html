@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    {{key}}
+    <br>
+    <center>
+        <form action="{% url 'logindata' %}" method="post" class="reg-form" style="width: 500px; 
+        height: 300px; background-color:rgb(61, 58, 58); justify-content:baseline; padding: 20px; border-radius: 40px; color: white;">
+        {% csrf_token %}
+
+            <h1>Login Here...</h1>
+            Email:<input type="email" name="email"  class="input" style="border: 1px; padding-left: 5px; margin-left: 35px;
+            border-color: black; border-radius: 40px;">
+            <br>
+            <br>
+            Password:<input type="password" name="password" class="input" style="border: 1px; padding-left: 5px; margin-left: 5px;
+            border-color: black; border-radius: 40px;">
+            <br>
+            <br>
+            <input type="submit" name="submit" class="btn" style="border-radius: 50px;
+            background-color: black; color: white; width: 90px; height: 40px;">
+        </form>
+    </center>
+    {% endblock %}
+    
+    
+</body>
+</html>
