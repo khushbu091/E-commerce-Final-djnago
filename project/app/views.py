@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from .models import User,ItemInfo
+from .models import User,ItemInfo,Product
 from django.db.models import Q
 from .forms import ItemInfoForm
+from project.settings import MEDIA_URL, MEDIA_ROOT
+
 import razorpay
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -78,13 +80,16 @@ def add_product(request):
         if form.is_valid():
             form.save()
         data = ItemInfo.objects.all()
+        print(data)
         return render(request,'add_product.html',{'form':form,'data':data})
     form = ItemInfoForm()
     data = ItemInfo.objects.all()
+    print(data)
     if data:
         return render(request,'add_product.html',{'form':form,'data':data})
     else:
         return render(request,'add_product.html',{'form':form})
+
 def addtocard(request,pk):
     if request.method == 'POST':
         quantity = request.session.get('quantity', [])
@@ -203,7 +208,7 @@ def payment(request):
         # amount in paisa
         amount = int(request.POST.get('amount')) * 100
         
-        client = razorpay.Client(auth =("rzp_test_pr99iascS1WRtU" , "UTDIzPGwICnAssu3Q3lk7zUi"))
+        client = razorpay.Client(auth =("rzp_test_892iHOsVKe5P2o" , "4fEJrPM3O5gKIZr0LCMFr68c"))
         # create order
         
         data = { "amount": amount, "currency": "INR", "receipt": "order_rcptid_11" }
@@ -229,7 +234,7 @@ def payment(request):
             i+=1
             j+=1
         # print(payment)
-        return render(request,'app/cart.html',{'key':alldata,'amount':total,'payment':payment})
+        return render(request,'showcart.html',{'key':alldata,'amount':total,'payment':payment})
     
 @csrf_exempt
 def payment_status(request):
@@ -245,7 +250,7 @@ def payment_status(request):
         }
 
         # client instance
-        client = razorpay.Client(auth =("rzp_test_pr99iascS1WRtU" , "UTDIzPGwICnAssu3Q3lk7zUi"))
+        client = razorpay.Client(auth =("rzp_test_892iHOsVKe5P2o" , "4fEJrPM3O5gKIZr0LCMFr68cv"))
 
         try:
             status = client.utility.verify_payment_signature(razorpay_data)
@@ -254,6 +259,6 @@ def payment_status(request):
             product.paid = True
             product.save()
             
-            return render(request, 'app/success.html', {'status': True})
+            return render(request, 'success.html', {'status': True})
         except:
-            return render(request, 'app/success.html', {'status': False})
+            return render(request, 'success.html', {'status': False})
