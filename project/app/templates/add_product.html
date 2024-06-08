@@ -34,7 +34,7 @@
                         <form action="{% url 'addtocard' pk=i.id %}" method="post">
                             {% csrf_token%}
                             <img src="{{i.item_image.url}}" class="card-img-top" style="width: 17rem; height: 10rem;" alt="">
-                            Product Name:<p class="card-title">{{i.iten_name}}</p>
+                            Product Name:<p class="card-title">{{i.item_name}}</p>
                             Product Dec:<p class="card-text">{{i.item_desc}}</p>
                             Product Price:Rs.<p class="card-text">{{i.item_price}}</p>
                             Product Quantity:<input type="number" name="quantity" value="1">

@@ -126,7 +126,7 @@ def showcart(request):
         # print(data.item_image)
         alldata.append({
             'id':data.id,
-            'iten_name':data.iten_name,
+            'item_name':data.item_name,
             'item_desc':data.item_desc,
             'item_price':data.item_price,
             'item_image':data.item_image,
@@ -137,6 +137,8 @@ def showcart(request):
     # print("Total Amount = ",total)
     # print(alldata)
     return render(request,'showcart.html',{'key':alldata,'amount':total})
+#-------------------------------***************--------------------------------------
+
 def deletecart(request,pk):
     cart = request.session.get('cart',[])
     quantity = request.session.get('quantity',[])
@@ -190,7 +192,7 @@ def deletecart(request,pk):
         # print(data.item_image)
         alldata.append({
             'id':data.id,
-            'iten_name':data.iten_name,
+            'item_name':data.item_name,
             'item_desc':data.item_desc,
             'item_price':data.item_price,
             'item_image':data.item_image,
@@ -201,6 +203,8 @@ def deletecart(request,pk):
     # print("Total Amount = ",total)
     print(alldata)
     return render(request,'showcart.html',{'key':alldata,'amount':total})
+
+#-------------------------****************--------------------------------------------------
 
 def payment(request):
     global payment
@@ -225,7 +229,7 @@ def payment(request):
             total = total + (data.item_price)*quantity[j]
             alldata.append({
                 'id':data.id,
-                'iten_name':data.iten_name,
+                'item_name':data.item_name,
                 'item_desc':data.item_desc,
                 'item_price':data.item_price,
                 'item_image':data.item_image,

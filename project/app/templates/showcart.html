@@ -10,8 +10,10 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'mail/contact.js' %}"></script>
 
-    
 </head>
 
 <body>
@@ -23,14 +25,14 @@
         {% for i in key %}
         <div class="col-4">
             <div class="card" style="width: 20rem; height: 27rem; margin-bottom: 10px;padding-left: 10px;">
-                <form action="{% url 'payment' %}" method="post">
+                <form action="" method="post">
                     {% csrf_token%}
                     <img src="{{i.item_image.url}}" class="card-img-top" style="width: 20rem; height: 10rem;" alt="">
-                    <p class="card-title">Name:{{i.iten_name}}</p>
+                    <p class="card-title">Name:{{i.item_name}}</p>
                     <p class="card-text">Desc:{{i.item_desc}}</p>
                     <p class="card-text">Price:{{i.item_price}}</p>
                     <p class="card-text">Quantity:{{i.item_quantity}}</p>
-                    <input type="hidden" name="amount" value="{{ i.item_price }}">
+                    <input type="hidden" name="Product_id" value="{{i.item_id}}">
                     <button class="btn btn-primary">Buy Now</button>
                     <button style="background-color: black; color: rgb(237, 237, 30);border: none; width: 80px; height: 35px;"><a href="{% url 'deletecart' pk=i.id  %}">Delete</a></button>
                 </form>

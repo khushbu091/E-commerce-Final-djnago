@@ -19,6 +19,8 @@ urlpatterns = [
     path("addtocart/",cart,name="cart"),
     path("deletecart/<int:pk>",deletecart,name='deletecart'),
     path("payment/",payment,name='payment'),
+    # path("initiate_payment/",initiate_payment,name='initiate_payment'),
+
     path('payment-status', payment_status, name='payment-status')
 
 
